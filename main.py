@@ -8,10 +8,8 @@ llm = ChatOllama(
    temperature=0.7 
 )
 
-#message = [ SystemMessage(content="?."), HumanMessage(content="What is RAG?")
-
-        
-        
+message = [ SystemMessage(content="?."), HumanMessage(content="What is RAG?")]
+       
 prompt = ChatPromptTemplate.from_messages([
      ("system", "You are a helpful assistant."),
      ("human", "{question}")
@@ -23,4 +21,5 @@ prompt = ChatPromptTemplate.from_messages([
     ("system", "You are a helpful assistant"),
     ("human", "{question}") 
 ])
-print(response)
+for chunk in chain.stream({"question": "What is RAG?"}):
+    print(chunk, end="", flush=True)
